@@ -24,28 +24,27 @@ namespace Trombinoscope
         public UCEmployes()
         {
             InitializeComponent();
-            lbxNomEmployes.SelectionChanged += LbxNomEmployes_SelectionChanged;
-            ListeEmployes = DAL.GetEmployesInformations();
-            tbkId.Visibility = Visibility.Hidden;
-            tbkNom.Visibility = Visibility.Hidden;
-            tbkPrenom.Visibility = Visibility.Hidden;
-            foreach (var p in ListeEmployes)
-            {
-                lbxNomEmployes.DisplayMemberPath = "NomComplet";
-                lbxNomEmployes.SelectedValuePath = "Id";
-                lbxNomEmployes.Items.Add(p);
-            }
+            GridEmp.DataContext = DAL.GetEmployesInformations();
+            //lbxNomEmployes.SelectionChanged += LbxNomEmployes_SelectionChanged;
+            //ListeEmployes = DAL.GetEmployesInformations();
+            //foreach (var p in ListeEmployes)
+            //{
+            //    lbxNomEmployes.DisplayMemberPath = "NomComplet";
+            //    lbxNomEmployes.SelectedValuePath = "Id";
+            //    lbxNomEmployes.Items.Add(p);
+            //}
         }
 
-        private void LbxNomEmployes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            tbkId.Visibility = Visibility.Visible;
-            tbkNom.Visibility = Visibility.Visible;
-            tbkPrenom.Visibility = Visibility.Visible;
-            var p = (Personne)lbxNomEmployes.SelectedItem;
-                tbkId.Text = "ID : " + (p.Id).ToString();
-                tbkNom.Text = "Nom : " + p.Nom;
-                tbkPrenom.Text = "Prénom : " + p.Prénom;
-        }
+        //private void LbxNomEmployes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    //tbkId.Visibility = Visibility.Visible;
+        //    //tbkNom.Visibility = Visibility.Visible;
+        //    //tbkPrenom.Visibility = Visibility.Visible;
+        //    //var p = (Personne)lbxNomEmployes.SelectedItem;
+        //    //    tbkId.Text = "ID : " + (p.Id).ToString();
+        //    //    tbkNom.Text = "Nom : " + p.Nom;
+        //    //    tbkPrenom.Text = "Prénom : " + p.Prénom;
+        //    GridEmp.DataContext = (Personne)lbxNomEmployes.SelectedItem;
+        //}
     }
 }

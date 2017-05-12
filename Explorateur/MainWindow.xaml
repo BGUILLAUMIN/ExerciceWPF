@@ -18,18 +18,14 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
-
+        <!-- Séparateur de grille -->
         <GridSplitter Grid.Column="1" Grid.Row="3" Width="2" Margin="0,5"
                       Background="LightBlue" HorizontalAlignment="Left" Grid.RowSpan="5"/>
-
         <GridSplitter Grid.Row="2" Height="2" HorizontalAlignment="Stretch" Margin="5,0"
                       Background="LightBlue" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-
         <GridSplitter Grid.Row="3" Height="2" HorizontalAlignment="Stretch" Margin="5,0"
                       Background="LightBlue" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-
         <!-- Ligne 0 -->
         <Label Content="Dossier à analyser" VerticalAlignment="Center"/>
         <!-- Ligne 1 -->
@@ -39,8 +35,7 @@
             <TextBox Grid.Row="1" Margin="5"/>
         </DockPanel>
         <!-- Ligne 2 -->
-        <Button Grid.Row="2" Margin="5"
-                Content="Analyser" FontSize="16"/>
+        <Button Grid.Row="2" Content="Analyser"/>
         <DockPanel Grid.Row="2" Grid.Column="1" Margin="5" Background="LightBlue">
             <Label Content="Fichiers projets"/>
             <Label Content="39" HorizontalAlignment="Right" Margin="10,0" FontWeight="Bold"/>

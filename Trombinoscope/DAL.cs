@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -55,8 +56,12 @@ namespace Trombinoscope
 
         public static List<Personne> GetEmployesInformations()
         {
+            int IdCourant;
+            Personne p = null;
             List<Personne> listeEmployes = new List<Personne>();
-            string queryString = @"select EmployeeID, LastName, FirstName from Employees";
+            string queryString = @"select E.EmployeeID, E.LastName, E.FirstName, T.TerritoryID, T.TerritoryDescription from Employees E
+                                   inner join EmployeeTerritories ET on ET.EmployeeID = E.EmployeeID
+                                   inner join Territories T on ET.TerritoryID = T.TerritoryID";
             string connectString = Properties.Settings.Default.ConnectionString;
 
             using (var connect = new SqlConnection(connectString))
@@ -68,12 +73,23 @@ namespace Trombinoscope
                 {
                     while (reader.Read())
                     {
-                        Personne p = new Personne();
-                        p.Id = (int)reader[0];
-                        p.Nom = (string)reader[1];
-                        p.Prénom = (string)reader[2];
-                        p.NomComplet = (string)reader[2] + " " + (string)reader[1];
-                        listeEmployes.Add(p);
+                        IdCourant = (int)reader[0];
+                        if (listeEmployes.Count == 0 || listeEmployes.Last().Id != IdCourant)
+                        {
+                            p = new Personne();
+                            p.ListeTerritoire = new List<Territoire>();
+                            p.Id = (int)reader[0];
+                            p.Nom = (string)reader[1];
+                            p.Prénom = (string)reader[2];
+                            p.NomComplet = (string)reader[2] + " " + (string)reader[1];
+                            listeEmployes.Add(p);
+                        }
+                        else p = listeEmployes[listeEmployes.Count - 1];
+
+                        Territoire ter = new Territoire();
+                        ter.IdTerritoire = (string)reader[3];
+                        ter.DscrpTerritoire = (string)reader[4];
+                        p.ListeTerritoire.Add(ter);
                     }
                 }
             }

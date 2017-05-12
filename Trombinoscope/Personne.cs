@@ -12,5 +12,6 @@ namespace Trombinoscope
         public string Prénom { get; set; }
         public string Nom { get; set; }
         public string NomComplet { get; set; }
+        public List<Territoire> ListeTerritoire { get; set; }
     }
 }

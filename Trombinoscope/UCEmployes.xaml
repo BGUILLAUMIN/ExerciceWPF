@@ -6,22 +6,46 @@
              xmlns:local="clr-namespace:Trombinoscope"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="CouleurEmploye" Color="LightGray"/>
+    </UserControl.Resources>
+
+    <Grid Name="GridEmp">
         <!--Définition des colonnes-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-
         <DockPanel Grid.Column="0">
-            <Image Source="pack://application:,,,/Images/Photo.jpg" Width="70" DockPanel.Dock="Top" Margin="10"/>
-            <Label Content="Liste des Employés" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="10,0"/>
-            <ListBox Name="lbxNomEmployes" Margin="10"/>
+            <Image Source="pack://application:,,,/Images/Photo.jpg" Width="100" DockPanel.Dock="Top" Margin="10"/>
+            <ListView Name="lbxNomEmployes" Margin="10"
+                     ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Prénom" Width="100" DisplayMemberBinding="{Binding Path=Prénom}"/>
+                        <GridViewColumn Header="Nom" Width="150" DisplayMemberBinding="{Binding Path=Nom}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </DockPanel>
-        <StackPanel  Orientation="Vertical" Margin="0,90" Grid.Column="1">
-            <TextBlock Name="tbkId" Text="ID" Margin="5"/>
-            <TextBlock Name="tbkNom" Text="Nom" Margin="5"/>
-            <TextBlock Name="tbkPrenom" Text="Prénom" Margin="5"/>
+        <StackPanel  Orientation="Vertical" Margin="10,96,10,10" Grid.Column="1" Background="{Binding Source={StaticResource CouleurEmploye}}">
+            <TextBlock Name="tbkId" Text="{Binding Id}" Margin="5" />
+            <TextBlock Name="tbkNom" Text="{Binding Nom}" Margin="5"/>
+            <TextBlock Name="tbkPrenom" Text="{Binding Prénom}" Margin="5"/>
+        </StackPanel>
+        <ListView Name="lvTerritoire" Margin="10,90,10,10" Grid.Column="1"
+                     ItemsSource="{Binding ListeTerritoire}" IsSynchronizedWithCurrentItem="True">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True">
+                    <GridViewColumn Header="Id Territoire" DisplayMemberBinding="{Binding Path=IdTerritoire}"/>
+                    <GridViewColumn Header="Description Territoire"  DisplayMemberBinding="{Binding Path=DscrpTerritoire}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="10,50,10,10">
+            <Label Content="Nombre de territoire" Grid.Column="1"/>
+            <Label Content="{Binding ListeTerritoire.Count}" Grid.Column="1"/>
         </StackPanel>
     </Grid>
 </UserControl>

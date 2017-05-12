@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenetreParamétrage", "Fene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Explorateur", "Explorateur\Explorateur.csproj", "{BD3956D5-6AA3-40D1-8AA9-17C1C2BD9ACF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding", "Binding\Binding.csproj", "{A459271C-8983-4252-B2AF-05B9307581CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BD3956D5-6AA3-40D1-8AA9-17C1C2BD9ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD3956D5-6AA3-40D1-8AA9-17C1C2BD9ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD3956D5-6AA3-40D1-8AA9-17C1C2BD9ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A459271C-8983-4252-B2AF-05B9307581CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A459271C-8983-4252-B2AF-05B9307581CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A459271C-8983-4252-B2AF-05B9307581CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A459271C-8983-4252-B2AF-05B9307581CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
