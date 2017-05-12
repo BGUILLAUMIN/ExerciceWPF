@@ -9,9 +9,7 @@
     <StackPanel Margin="10">
         <!-- Entête -->
         <StackPanel Orientation="Horizontal" Margin="10,10">
-            <ContentControl  HorizontalAlignment="Left">
-                <StaticResource ResourceKey="imgUser"/>
-            </ContentControl>
+            <StaticResource ResourceKey="imgUser"/>
             <Label Content="Options générales d'utilisation de Word" VerticalAlignment="Center"/>
         </StackPanel>
         <!-- Bandeau 1ère sous partie-->
@@ -72,9 +70,7 @@
                 <Button.ToolTip>
                     <ToolTip>
                         <StackPanel Orientation="Horizontal">
-                            <ContentControl>
-                                <StaticResource ResourceKey="imgAmpoule"/>
-                            </ContentControl>
+                            <StaticResource ResourceKey="imgAmpoule"/>
                             <TextBlock>Choisissez les programmes que vous souhaitez utiliser en tant qu'extension.</TextBlock>
                         </StackPanel>
                     </ToolTip>

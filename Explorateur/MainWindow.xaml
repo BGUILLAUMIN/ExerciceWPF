@@ -75,7 +75,6 @@
                 </StackPanel>
             </GroupBox>
         </DockPanel>
-
         <!-- Colonne 1 Liste -->
         <ListBox Grid.Column="1" Grid.Row="3" Margin="10">
             <ListBoxItem Content="item 1"/>

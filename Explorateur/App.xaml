@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:Explorateur"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="ListBoxItem">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
