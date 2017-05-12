@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Trombinoscope.UCEmployes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Trombinoscope"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <!--Définition des colonnes-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Column="0">
+            <Image Source="pack://application:,,,/Images/Photo.jpg" Width="70" DockPanel.Dock="Top" Margin="10"/>
+            <Label Content="Liste des Employés" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="10,0"/>
+            <ListBox Name="lbxNomEmployes" Margin="10"/>
+        </DockPanel>
+        <StackPanel  Orientation="Vertical" Margin="0,90" Grid.Column="1">
+            <TextBlock Name="tbkId" Text="ID" Margin="5"/>
+            <TextBlock Name="tbkNom" Text="Nom" Margin="5"/>
+            <TextBlock Name="tbkPrenom" Text="Prénom" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

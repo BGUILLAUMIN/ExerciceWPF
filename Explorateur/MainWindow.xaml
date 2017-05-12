@@ -1,0 +1,87 @@
+﻿<Window x:Class="Explorateur.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Explorateur"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="420" Width="525">
+    <Grid>
+        <!-- Définition des colonnes -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="275"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Définition des lignes -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <GridSplitter Grid.Column="1" Grid.Row="3" Width="2" Margin="0,5"
+                      Background="LightBlue" HorizontalAlignment="Left" Grid.RowSpan="5"/>
+
+        <GridSplitter Grid.Row="2" Height="2" HorizontalAlignment="Stretch" Margin="5,0"
+                      Background="LightBlue" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+
+        <GridSplitter Grid.Row="3" Height="2" HorizontalAlignment="Stretch" Margin="5,0"
+                      Background="LightBlue" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+
+        <!-- Ligne 0 -->
+        <Label Content="Dossier à analyser" VerticalAlignment="Center"/>
+        <!-- Ligne 1 -->
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <Button Grid.Column="1" Grid.Row="1" Margin="5" 
+                Content="..." FontSize="20" Width="50" DockPanel.Dock="Right"/>
+            <TextBox Grid.Row="1" Margin="5"/>
+        </DockPanel>
+        <!-- Ligne 2 -->
+        <Button Grid.Row="2" Margin="5"
+                Content="Analyser" FontSize="16"/>
+        <DockPanel Grid.Row="2" Grid.Column="1" Margin="5" Background="LightBlue">
+            <Label Content="Fichiers projets"/>
+            <Label Content="39" HorizontalAlignment="Right" Margin="10,0" FontWeight="Bold"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="3">
+            <!-- Expander -->
+            <Expander ExpandDirection="Up" IsExpanded="False" Header="Statistiques" DockPanel.Dock="Bottom" BorderBrush="Red" Margin="5">
+                <Border BorderBrush="Red">
+                    <StackPanel>
+                        <Label Content="120 fichiers" Grid.Row="4" FontSize="15" FontWeight="Bold" 
+                               Margin="5,0" VerticalAlignment="Center"/>
+                        <!-- Ligne 5 -->
+                        <Label Content="104 fichiers CS" Grid.Row="5"  FontSize="15" FontWeight="Bold"
+                               Margin="5,0" VerticalAlignment="Center"/>
+                        <!-- Ligne 6 -->
+                        <Label Content="Nom le plus long" Grid.Row="6"  FontSize="15" FontWeight="Bold"
+                               Margin="5,0" VerticalAlignment="Center"/>
+                        <!-- Ligne 7 -->
+                        <TextBlock Text="Un nom de fichier très long qui ne tient pas sur une seule ligne" 
+                                   Grid.Row="7" FontSize="12" TextWrapping="Wrap" Margin="5,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Expander>
+            <!-- GroupBox -->
+            <GroupBox Margin="5" Header="Afficher">
+                <StackPanel>
+                    <CheckBox Content="Nombre total de fichiers" Margin="3" IsChecked="True"/>
+                    <CheckBox Content="Nombre total de fichiers CS" Margin="3" IsChecked="True"/>
+                    <CheckBox Content="Nom du fichier le plus long" Margin="3" IsChecked="True"/>
+                    <CheckBox Content="Liste des fichiers projets" Margin="3" IsChecked="True"/>
+                </StackPanel>
+            </GroupBox>
+        </DockPanel>
+
+        <!-- Colonne 1 Liste -->
+        <ListBox Grid.Column="1" Grid.Row="3" Margin="10">
+            <ListBoxItem Content="item 1"/>
+            <ListBoxItem Content="item 2"/>
+            <ListBoxItem Content="item 3"/>
+        </ListBox>
+
+    </Grid>
+</Window>

@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FenetreParamétrage">
+    <!-- Ajout d'une ressource image -->
+    <Image x:Key="imgUser" Height="40" Source="pack://application:,,,/Images/Users.png"/>
+    <Image x:Key="imgAmpoule" Height="20" Source="pack://application:,,,/Images/Ampoule.jpg"/>
+</ResourceDictionary>

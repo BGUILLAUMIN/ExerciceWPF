@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="FenetreParamétrage.UCGeneral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FenetreParamétrage"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="500">
+    <StackPanel Margin="10">
+        <!-- Entête -->
+        <StackPanel Orientation="Horizontal" Margin="10,10">
+            <ContentControl  HorizontalAlignment="Left">
+                <StaticResource ResourceKey="imgUser"/>
+            </ContentControl>
+            <Label Content="Options générales d'utilisation de Word" VerticalAlignment="Center"/>
+        </StackPanel>
+        <!-- Bandeau 1ère sous partie-->
+        <Label Content="Options d'interface utilisateur" Style="{StaticResource styleTitre}"/>
+        <!-- 1ère sous partie -->
+        <CheckBox Content="Afficher la mini barre d'outils lors de la sélection" Margin="5" IsChecked="True"/>
+        <CheckBox Content="Activer l'aperçu instantané" Margin="5"/>
+        <CheckBox Content="Mettre à jour le contenu des documents pendant leur déplacement" Margin="5"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Style d'info-bulle : " DockPanel.Dock="Left" VerticalAlignment="Center"/>
+            <ComboBox Margin="5,10" Style="{StaticResource StyleComboBox}">
+                <ComboBoxItem IsSelected="True">Afficher les descriptions des fonctionnalités dans des info-bulles</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <!-- Bandeau 2ème sous partie -->
+        <Label Content="Personnaliser votre suite de programmes Microsoft Office" Style="{StaticResource styleTitre}"/>
+        <!-- Grille pour la 2ème sous partie -->
+        <Grid Margin="5">
+            <!-- Définition des 5 lignes -->
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!-- Définition des 2 colonnes -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Ligne 1 -->
+            <Label Content="Nom d'utilisateur : " Margin="5"/>
+            <TextBox Width="200" Grid.Column="1" Margin="5" HorizontalAlignment="Left" Text="Cyril Seguenot" VerticalAlignment="Center"/>
+            <!-- Ligne 2 -->
+            <Label Content="Initiales : " Grid.Row="1" Margin="5"/>
+            <TextBox Width="80" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Left" Text="CS" VerticalAlignment="Center"/>
+            <!-- Ligne 3 -->
+            <CheckBox Content="Toujours utiliser ces valeurs, quel que soit l'état de connexion à Office"
+                      Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
+            <!-- Ligne 4 -->
+            <Label Content="Arrière-plan Office : " Grid.Row="3" Margin="5"/>
+            <ComboBox Grid.Column="1" Grid.Row="3" Margin="5" HorizontalAlignment="Left">
+                <ComboBoxItem Content="Aucun arrière-plan" IsSelected="True"/>
+            </ComboBox>
+            <!-- Ligne 5 -->
+            <Label Content="Thème Office : " Grid.Row="4" Margin="5"/>
+            <ComboBox  Grid.Column="1" Grid.Row="4" Margin="5" HorizontalAlignment="Left">
+                <ComboBoxItem Content="En couleur" IsSelected="True"/>
+            </ComboBox>
+        </Grid>
+        <!-- Bandeau 3ème sous partie -->
+        <Label Content="Options de démarrage" Style="{StaticResource styleTitre}"/>
+        <!-- 3ème sous partie -->
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Choisir les extensions que Word doit toujours ouvrir : " DockPanel.Dock="Left" VerticalAlignment="Center"/>
+            <Button Content="Programmes que vous souhaitez utiliser...">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel Orientation="Horizontal">
+                            <ContentControl>
+                                <StaticResource ResourceKey="imgAmpoule"/>
+                            </ContentControl>
+                            <TextBlock>Choisissez les programmes que vous souhaitez utiliser en tant qu'extension.</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
+        <CheckBox Content="Me prévenir si Word n'est pas toujours utilisé pour l'affichage et la modification des documents" Margin="5"/>
+        <CheckBox Content="Ouvrir les pièces jointes et autres fichiers non modifiables en mode plein écran" Margin="5"/>
+        <CheckBox Content="Afficher l'écran de démarrage au lancement de l'application" Margin="5"/>
+    </StackPanel>
+</UserControl>

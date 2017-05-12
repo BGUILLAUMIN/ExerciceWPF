@@ -1,0 +1,33 @@
+﻿<Window x:Class="FenetreParamétrage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FenetreParamétrage"
+        mc:Ignorable="d"
+        Title="Option Word" Height="600" Width="700">
+    <DockPanel Background="LightGray">
+        <!-- Positionnement des boutons -->
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="btnOK" Content="_OK" Width="70" Margin="5" ToolTip="Valider les paramètres."/>
+            <Button Name="btnAnnuler" Content="_Annuler" Width="70" Margin="5" ToolTip="Annuler les paramètres."/>
+        </StackPanel>
+        <DockPanel>
+            <TabControl TabStripPlacement="Left" Margin="5">
+                <!-- Table Index Général -->
+                <TabItem Header="_Général">
+                    <!-- Application d'un scroll vertical -->
+                    <ScrollViewer>
+                        <local:UCGeneral/>
+                    </ScrollViewer>
+                </TabItem>
+                <!-- Table Index Affichage -->
+                <TabItem Header="_Affichage">
+                    <local:UCAffichage/>
+                </TabItem>
+                <!-- Table Index Vérification -->
+                <TabItem Header="_Vérification"/>
+            </TabControl>
+        </DockPanel>
+    </DockPanel>
+</Window>

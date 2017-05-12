@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Entrainement"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="MainWindow" Height="250" Width="330">
+    <Grid Margin="5">
+        <!--<Button Width="150" Height="40" Margin="20" FontSize="16" Content="Un bouton"
+                HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"/>-->
+        <!-- Déclaration des lignes -->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- Déclaration des colonnes -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="AUTO" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- lIgne 0 -->
+        <Label Content="Nom"
+               HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" 
+                 VerticalAlignment="Center"/>
+        <!-- ligne 1 -->
+        <Label Content="Prénom" Grid.Row="1"
+               HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="1" 
+                 VerticalAlignment="Center"/>
+        <!-- ligne 2 -->
+        <Label Content="Date de naissance" Grid.Row="2"
+               HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" 
+                    VerticalAlignment="Center"/>
+        <!-- ligne 3 -->
+        <Button Content="Valider"  Grid.Row="3" 
+                VerticalAlignment="Center"
+                Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
