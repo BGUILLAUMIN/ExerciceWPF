@@ -59,9 +59,10 @@ namespace Trombinoscope
             int IdCourant;
             Personne p = null;
             List<Personne> listeEmployes = new List<Personne>();
-            string queryString = @"select E.EmployeeID, E.LastName, E.FirstName, T.TerritoryID, T.TerritoryDescription from Employees E
+            string queryString = @"select E.EmployeeID, E.LastName, E.FirstName, E.Photo, M.FirstName, M.LastName, T.TerritoryID, T.TerritoryDescription from Employees E
                                    inner join EmployeeTerritories ET on ET.EmployeeID = E.EmployeeID
-                                   inner join Territories T on ET.TerritoryID = T.TerritoryID";
+                                   inner join Territories T on ET.TerritoryID = T.TerritoryID
+                                   left outer join Employees M on M.EmployeeID = E.ReportsTo";
             string connectString = Properties.Settings.Default.ConnectionString;
 
             using (var connect = new SqlConnection(connectString))
@@ -82,13 +83,18 @@ namespace Trombinoscope
                             p.Nom = (string)reader[1];
                             p.Prénom = (string)reader[2];
                             p.NomComplet = (string)reader[2] + " " + (string)reader[1];
+                            p.Photo = ConvertBytesToImageSource((Byte[])reader[3]);
+                            if (reader[4] != DBNull.Value)
+                                p.PrénomManager = (string)reader[4];
+                            if (reader[5] != DBNull.Value)
+                                p.NomManager = (string)reader[5];
                             listeEmployes.Add(p);
                         }
                         else p = listeEmployes[listeEmployes.Count - 1];
 
                         Territoire ter = new Territoire();
-                        ter.IdTerritoire = (string)reader[3];
-                        ter.DscrpTerritoire = (string)reader[4];
+                        ter.IdTerritoire = (string)reader[6];
+                        ter.DscrpTerritoire = (string)reader[7];
                         p.ListeTerritoire.Add(ter);
                     }
                 }

@@ -23,14 +23,14 @@ namespace Trombinoscope
         public UCTrombi()
         {
             InitializeComponent();
-            var listePhotos = DAL.GetEmployeesPhotos();
-            foreach (var p in listePhotos)
-            {
-                var controlImage = new Image();
-                controlImage.Source = p;
-                controlImage.Width = 200;
-                lbxPhotos.Items.Add(controlImage);
-            }
+            lbxPhotos.DataContext = DAL.GetEmployesInformations();
+            //foreach (var p in listePhotos)
+            //{
+            //    var controlImage = new Image();
+            //    controlImage.Source = p;
+            //    controlImage.Width = 200;
+            //    lbxPhotos.Items.Add(controlImage);
+            //}
         }
     }
 }

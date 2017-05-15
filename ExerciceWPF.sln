@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Explorateur", "Explorateur\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding", "Binding\Binding.csproj", "{A459271C-8983-4252-B2AF-05B9307581CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relevésmétéo", "Relevés météo\Relevésmétéo.csproj", "{1503E7BA-32E4-47F5-8FF4-9C7431C1FF84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A459271C-8983-4252-B2AF-05B9307581CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A459271C-8983-4252-B2AF-05B9307581CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A459271C-8983-4252-B2AF-05B9307581CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1503E7BA-32E4-47F5-8FF4-9C7431C1FF84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1503E7BA-32E4-47F5-8FF4-9C7431C1FF84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1503E7BA-32E4-47F5-8FF4-9C7431C1FF84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1503E7BA-32E4-47F5-8FF4-9C7431C1FF84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

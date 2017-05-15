@@ -8,6 +8,9 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <SolidColorBrush x:Key="CouleurEmploye" Color="LightGray"/>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid Name="GridEmp">
@@ -18,22 +21,34 @@
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0">
             <Image Source="pack://application:,,,/Images/Photo.jpg" Width="100" DockPanel.Dock="Top" Margin="10"/>
-            <ListView Name="lbxNomEmployes" Margin="10"
+            <ListView Name="lbxNomEmployes" Margin="10" 
                      ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
                 <ListView.View>
                     <GridView AllowsColumnReorder="True">
-                        <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Path=Id}"/>
-                        <GridViewColumn Header="Prénom" Width="100" DisplayMemberBinding="{Binding Path=Prénom}"/>
-                        <GridViewColumn Header="Nom" Width="150" DisplayMemberBinding="{Binding Path=Nom}"/>
+                        <GridViewColumn Header="ID"  DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Prénom" DisplayMemberBinding="{Binding Path=Prénom}"/>
+                        <GridViewColumn Header="Nom"  DisplayMemberBinding="{Binding Path=Nom}"/>
+                        <GridViewColumn Header="Manager" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <StackPanel Orientation="Horizontal" Background="AliceBlue">
+                                        <TextBlock Text="{Binding Path=NomManager, StringFormat='\{0\} '}"/>
+                                        <TextBlock Text="{Binding Path=PrénomManager}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Photo">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=Photo}" Width="20"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
         </DockPanel>
-        <StackPanel  Orientation="Vertical" Margin="10,96,10,10" Grid.Column="1" Background="{Binding Source={StaticResource CouleurEmploye}}">
-            <TextBlock Name="tbkId" Text="{Binding Id}" Margin="5" />
-            <TextBlock Name="tbkNom" Text="{Binding Nom}" Margin="5"/>
-            <TextBlock Name="tbkPrenom" Text="{Binding Prénom}" Margin="5"/>
-        </StackPanel>
         <ListView Name="lvTerritoire" Margin="10,90,10,10" Grid.Column="1"
                      ItemsSource="{Binding ListeTerritoire}" IsSynchronizedWithCurrentItem="True">
             <ListView.View>
