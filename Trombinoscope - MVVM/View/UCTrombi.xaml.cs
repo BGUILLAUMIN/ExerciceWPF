@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace Trombinoscope
 {
     /// <summary>
-    /// Interaction logic for UCEmployes.xaml
+    /// Interaction logic for UCTrombi.xaml
     /// </summary>
-    public partial class UCEmployes : UserControl
+    public partial class UCTrombi : UserControl
     {
-        public List<Personne> ListeEmployes { get; set; }
-        public UCEmployes()
+        public UCTrombi()
         {
             InitializeComponent();
-            DataContext = new ContexteEmploye();
         }
     }
 }

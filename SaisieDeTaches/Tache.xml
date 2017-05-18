@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Taches xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tache Id="1" Creation="2017-01-15T00:00:00" Term="2017-02-17T00:00:00" Prio="2" Fait="true">Apprendre à utiliser les règles de validation en WPF</Tache>
+  <Tache Id="2" Creation="2017-01-16T00:00:00" Term="2017-02-14T00:00:00" Prio="1" Fait="false">Apprendre à notifier le visuel des changements de la source de données</Tache>
+  <Tache Id="3" Creation="2017-01-17T00:00:00" Term="2017-02-15T00:00:00" Prio="2" Fait="true">Faire un exercice sur la validation de donnnées et la notification</Tache>
+  <Tache Id="4" Creation="2017-01-18T00:00:00" Term="2017-02-16T00:00:00" Prio="3" Fait="false">Lire la doc MSDN</Tache>
+  <Tache Id="5" Creation="2017-05-18T00:00:00+02:00" Term="2017-05-18T00:00:00+02:00" Prio="1" Fait="false" />
+  <Tache Id="6" Creation="2017-05-18T00:00:00+02:00" Term="2017-05-18T00:00:00+02:00" Prio="1" Fait="false" />
+</Taches>

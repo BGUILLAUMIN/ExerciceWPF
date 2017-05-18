@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49F89733-B411-4CD7-875B-1319F0826469}</ProjectGuid>
+    <ProjectGuid>{9842720E-97D0-4741-AF8A-89FA49672E84}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trombinoscope</RootNamespace>
-    <AssemblyName>Trombinoscope</AssemblyName>
+    <RootNamespace>BandesDessinées</RootNamespace>
+    <AssemblyName>BandesDessinées</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,21 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ContexteEmploye.cs" />
-    <Compile Include="list.cs" />
-    <Compile Include="Personne.cs" />
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="Territoire.cs" />
-    <Compile Include="UCEmployes.xaml.cs">
-      <DependentUpon>UCEmployes.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UCTrombi.xaml.cs">
-      <DependentUpon>UCTrombi.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WndAjoutEmploye.xaml.cs">
-      <DependentUpon>WndAjoutEmploye.xaml</DependentUpon>
-    </Compile>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Convertisseur\Convertisseur.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\VMBandeDessiné.cs" />
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -77,23 +66,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DAL.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Model\BD_DAL.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UCEmployes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UCTrombi.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WndAjoutEmploye.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -110,7 +88,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -123,7 +101,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Photo.jpg" />
+    <Resource Include="Images\Astérix.jpg" />
+    <Resource Include="Images\Les aventures de Tintin.jpg" />
+    <Resource Include="Images\Lucky Luke.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

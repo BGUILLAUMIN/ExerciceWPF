@@ -13,18 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Trombinoscope
+namespace BandesDessinées
 {
     /// <summary>
-    /// Interaction logic for UCEmployes.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class UCEmployes : UserControl
+    public partial class MainWindow : Window
     {
-        public List<Personne> ListeEmployes { get; set; }
-        public UCEmployes()
+        public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ContexteEmploye();
+
+            DataContext = new VMBandeDessiné();
         }
     }
 }

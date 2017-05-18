@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Relevés_météo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="350">
+        Title="Relevé Météo" Height="450" Width="350">
     <Window.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+        <local:DoubleToColorBrushConverter x:Key="DoubleToColorBrushConv"/>
+        <sys:Double x:Key="Seuil">10</sys:Double>
         <!-- Data template par vignette -->
         <DataTemplate x:Key="RelevésMétéo">
             <Border BorderBrush="Blue" BorderThickness="1">
@@ -17,11 +21,11 @@
                         </Style>
                     </Grid.Resources>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -41,21 +45,22 @@
         </DataTemplate>
         <!-- Data template par année -->
         <DataTemplate x:Key="RelevésParAnnée" >
-            <StackPanel>
-                <TextBlock Text="{Binding Path=Année}" Background="Aqua"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=Date, StringFormat=MMMM}" Width="50"/>
-                    <TextBlock Text="{Binding Path=TMin, StringFormat='Minimale : \{0\} °C'}" Width="100"/>
-                    <TextBlock Text="{Binding Path=TMax, StringFormat='Maximale : \{0\} °C'}" Width="100"/>
-                </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=Date, StringFormat=MMMM}" Width="70"/>
+                <TextBlock Text="{Binding Path=TMin, StringFormat='Minimale : \{0\} °C'}" Width="100"/>
+                <TextBlock Text="{Binding Path=TMax, StringFormat='Maximale : \{0\} °C'}" Width="100"/>
             </StackPanel>
+        </DataTemplate>
+        <!-- Data template en tete par année -->
+        <DataTemplate x:Key="EnTeteParAnnee">
+            <TextBlock Background="LightBlue" FontWeight="Bold" Text="{Binding Path=Name}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="5">
         <!-- Définition des 2 colonnes -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="166"/>
         </Grid.ColumnDefinitions>
         <!-- Définition des 4 lignes -->
         <Grid.RowDefinitions>
@@ -73,49 +78,65 @@
         <!-- Ligne 2 Vue -->
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
             <TextBlock Text="Vue" Margin="5"/>
-            <ComboBox Name="cbxVue" Width="150" Margin="5" IsSynchronizedWithCurrentItem="True" SelectedIndex="0">
-                <ComboBoxItem Content="Vignettes" />
-                <ComboBoxItem Content="Groupée par année"/>
+            <ComboBox Name="cbxVue" Width="100" SelectedValuePath="Tag" Margin="5" IsSynchronizedWithCurrentItem="True">
+                <ComboBoxItem Content="Vignettes" Name="itemVignettes" IsSelected="True" Tag="RelevésMétéo"/>
+                <ComboBoxItem Content="Groupés par année" Name="itemGroupes" Tag="RelevésParAnnée"/>
+            </ComboBox>
+            <TextBlock Text="Trier par" VerticalAlignment="Center"/>
+            <ComboBox Name="cbxTri" SelectedValuePath="Tag" Margin="5" SelectedIndex="0" Width="100" IsSynchronizedWithCurrentItem="True">
+                <ComboBoxItem Content="Mois" Tag="Mois"/>
+                <ComboBoxItem Content="TMin" Tag="TMin"/>
+                <ComboBoxItem Content="TMax" Tag="TMax"/>
+                <ComboBoxItem Content="Précipitations" Tag="Précipitations"/>
+                <ComboBoxItem Content="Ensoleillement" Tag="Ensoleillement"/>
+            </ComboBox>
+            <ComboBox Name="cbxCroissant" SelectedValuePath="Tag" Margin="5" SelectedIndex="0" Width="30" IsSynchronizedWithCurrentItem="True">
+                <ComboBoxItem Content="&#x23F6;" Tag="0"/>
+                <ComboBoxItem Content="&#x23F7;" Tag="1"/>
             </ComboBox>
         </StackPanel>
         <!-- Ligne 3 Liste -->
-        <ListBox Name="lbxRelevésMétéo" HorizontalAlignment="Stretch" IsSynchronizedWithCurrentItem="True"
-                    ItemsSource="{Binding}" ItemTemplate="{StaticResource RelevésMétéo}" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
+        <ListBox Name="lbxRelevésMétéo" HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True"
+                 ItemsSource="{Binding Path=Data}" ItemTemplate="{StaticResource RelevésMétéo}" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"
+                 Background="{Binding Path=Data/Précipitations, Converter={StaticResource DoubleToColorBrushConv}, ConverterParameter={StaticResource Seuil}}">
+            <ListBox.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource EnTeteParAnnee}"/>
+            </ListBox.GroupStyle>
+        </ListBox>
         <!-- Content Controle -->
-
-        <ContentControl Name="ControleContent" Content="{Binding}" ContentTemplate="{StaticResource RelevésMétéo}" Grid.Row="3" 
-                        Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Hidden"/>
+        <ContentControl Name="ControleContent" Content="{Binding Path=Data}" ContentTemplate="{StaticResource RelevésMétéo}" Grid.Row="3" 
+                        Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="{Binding ElementName=itemGroupes, Path=IsSelected, Converter={StaticResource BoolToVisibilityConv}}"/>
 
         <!-- Ligne 4 colonne 1 -->
-        <StackPanel Grid.Row="3" Name="stack1">
+        <StackPanel Grid.Row="3" Name="stack1" Visibility="{Binding ElementName=itemVignettes, Path=IsSelected, Converter={StaticResource BoolToVisibilityConv}}">
             <TextBlock Text="Mois le plus froid" Margin="5,0"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=MoisPlusFroid, StringFormat=MM-yyyy}" />
-                <TextBlock Text="{Binding Path=TMin, StringFormat=' : \{0}°C'}"/>
+                <TextBlock Text="{Binding Path=Stats.MoisPlusFroid, StringFormat=MM-yyyy}" />
+                <TextBlock Text="{Binding Path=Stats.TMin, StringFormat=' : \{0}°C'}"/>
             </StackPanel>
         </StackPanel>
         <!-- Ligne 4 colonne 2 -->
-        <StackPanel Grid.Row="3" Grid.Column="1" Name="stack2">
+        <StackPanel Grid.Row="3" Grid.Column="1" Name="stack2" Visibility="{Binding ElementName=itemVignettes, Path=IsSelected, Converter={StaticResource BoolToVisibilityConv}}">
             <TextBlock Text="Année la plus sèche" Margin="5,0"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=AnnéePlusSèche, StringFormat='\{0\} : '}"/>
-                <TextBlock Text="{Binding Path=PrécipitationsMin, StringFormat='\{0\} mm'}"/>
+                <TextBlock Text="{Binding Path=Stats.AnnéePlusSèche, StringFormat='\{0\} : '}"/>
+                <TextBlock Text="{Binding Path=Stats.PrécipitationsMin, StringFormat='\{0\} mm'}"/>
             </StackPanel>
         </StackPanel>
         <!-- Ligne 5 colonne 1 -->
-        <StackPanel Grid.Row="4" Name="stack3">
+        <StackPanel Grid.Row="4" Name="stack3" Visibility="{Binding ElementName=itemVignettes, Path=IsSelected, Converter={StaticResource BoolToVisibilityConv}}">
             <TextBlock Text="Mois le plus chaud" Margin="5,0"/>
             <StackPanel  Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=MoisPlusChaud, StringFormat=MM-yyyy}"/>
-                <TextBlock Text="{Binding Path=TMax, StringFormat=' : \{0}°C'}"/>
+                <TextBlock Text="{Binding Path=Stats.MoisPlusChaud, StringFormat=MM-yyyy}"/>
+                <TextBlock Text="{Binding Path=Stats.TMax, StringFormat=' : \{0}°C'}"/>
             </StackPanel>
         </StackPanel>
         <!-- Ligne 5 colonne 2 -->
-        <StackPanel Grid.Row="4" Grid.Column="1" Name="stack4">
+        <StackPanel Grid.Row="4" Grid.Column="1" Name="stack4" Visibility="{Binding ElementName=itemVignettes, Path=IsSelected, Converter={StaticResource BoolToVisibilityConv}}">
             <TextBlock Text="Année la plus humide" Margin="5,0"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=AnnéePlusHumide, StringFormat='\{0\} : '}"/>
-                <TextBlock Text="{Binding Path=PrécipitationsMax, StringFormat='\{0\} mm'}"/>
+                <TextBlock Text="{Binding Path=Stats.AnnéePlusHumide, StringFormat='\{0\} : '}"/>
+                <TextBlock Text="{Binding Path=Stats.PrécipitationsMax, StringFormat='\{0\} mm'}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

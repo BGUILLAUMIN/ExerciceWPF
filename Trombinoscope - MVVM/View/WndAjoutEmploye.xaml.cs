@@ -10,21 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Trombinoscope
 {
     /// <summary>
-    /// Interaction logic for UCEmployes.xaml
+    /// Interaction logic for WndAjoutEmploye.xaml
     /// </summary>
-    public partial class UCEmployes : UserControl
+    public partial class WndAjoutEmploye : Window
     {
-        public List<Personne> ListeEmployes { get; set; }
-        public UCEmployes()
+        public WndAjoutEmploye(Personne p)
         {
             InitializeComponent();
-            DataContext = new ContexteEmploye();
+            btnOk.Click += BtnOk_Click;
+            DataContext = p;
+        }
+
+        private void BtnOk_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }

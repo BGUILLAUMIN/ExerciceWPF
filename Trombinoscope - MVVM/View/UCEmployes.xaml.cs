@@ -20,11 +20,9 @@ namespace Trombinoscope
     /// </summary>
     public partial class UCEmployes : UserControl
     {
-        public List<Personne> ListeEmployes { get; set; }
         public UCEmployes()
         {
             InitializeComponent();
-            DataContext = new ContexteEmploye();
         }
     }
 }

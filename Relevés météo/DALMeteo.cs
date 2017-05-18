@@ -119,6 +119,7 @@ namespace Relevés_météo
 			double P = (op == Op.Min ? 10000 : 0);	// Précipitations min ou max
 			int A = 0;	// Année des précipitations min ou max
 
+
 			foreach (var an in data.Select(d => d.Année).Distinct())
 			{
 				precip = data.Where(a => a.Année == an).Sum(d => d.Précipitations);
@@ -151,7 +152,7 @@ namespace Relevés_météo
 		public double Précipitations { get; }
 		public double Ensoleillement { get; }
 
-		public DonnéesMois(DateTime date, double tmin, double tmax, double précip, double ensol)
+        public DonnéesMois(DateTime date, double tmin, double tmax, double précip, double ensol)
 		{
 			Date = date;
 			TMin = tmin;

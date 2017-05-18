@@ -1,0 +1,16 @@
+﻿<Application x:Class="Trombinoscope.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Trombinoscope"
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <!-- DataTemplates qui associent les vues aux vues-modèles -->
+        <DataTemplate DataType="{x:Type local:VMEmployes}">
+            <local:UCEmployes/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:VMTrombi}">
+            <local:UCTrombi/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

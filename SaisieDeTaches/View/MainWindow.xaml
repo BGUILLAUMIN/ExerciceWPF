@@ -1,0 +1,61 @@
+﻿<Window x:Class="SaisieDeTaches.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SaisieDeTaches"
+        mc:Ignorable="d"
+        Title="Saisie de taches" Height="350" Width="525">
+    <Window.Resources>
+        <local:BoolToCrossConverter x:Key="BoolToCrossConverter"/>
+        <local:ConvModeEditActivation x:Key="ConvModeEditActivation"/>
+        <local:ConvModeEditLectureSeule x:Key="ConvModeEditLectureSeule"/>
+    </Window.Resources>
+    <DockPanel>
+        <Expander DockPanel.Dock="Right" IsExpanded="False" ExpandDirection="Left" Margin="5">
+            <Border BorderBrush="Gray" BorderThickness="1 ">
+                <StackPanel Width="250" Margin="5">
+                    <StackPanel Orientation="Horizontal"  Margin="10" Height="40">
+                        <Button Content="+" Width="50" Command="{Binding CmdAjouter}" />
+                        <Button Content="&#x2212;" Width="50" Command="{Binding CmdSupprimer}"/>
+                        <Button Content="&#x2713;" Width="50" Command="{Binding CmdEnregistrer}"/>
+                        <Button Content="&#x21b6;" Width="50" Command="{Binding CmdAnnuler}"/>
+                    </StackPanel>
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Taches/Id, StringFormat='Tache N°{0}'}"/>
+                        <TextBlock Text="{Binding Path=Taches/Creation, StringFormat='crée le dd/MM/yyyy'}" Margin="40,0"/>
+                    </StackPanel>
+                    <TextBlock Text="Echéance" Margin="10,5"/>
+                    <DatePicker Margin="10,5" SelectedDate="{Binding Path=Taches/Term}" IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}"/>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Priorité"/>
+                        <TextBox Width="20" Margin="5,0" Text="{Binding Path=Taches/Prio}" IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}"/>
+                        <CheckBox Content="Fait" IsChecked="{Binding Path=Taches/Fait}" Margin="100,0" IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}"/>
+                    </StackPanel>
+                    <TextBlock Text="Description" Margin="10,0"/>
+                    <StackPanel Margin="10,0">
+                        <Border BorderThickness="1" BorderBrush="Gray">
+                            <ScrollViewer>
+                                <TextBox Text="{Binding Path=Taches/Description}" TextWrapping="Wrap" IsReadOnly="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Expander>
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Text="Liste des taches" Margin="5"/>
+            <ListView Margin="5" ItemsSource="{Binding Taches}" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Echeance" DisplayMemberBinding="{Binding Path=Term, StringFormat='\{0:d}'}"/>
+                        <GridViewColumn Header="Priorité" DisplayMemberBinding="{Binding Path=Prio}"/>
+                        <GridViewColumn Header="Fait" DisplayMemberBinding="{Binding Path=Fait, Converter={StaticResource BoolToCrossConverter}}"/>
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Description}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </DockPanel>
+</Window>

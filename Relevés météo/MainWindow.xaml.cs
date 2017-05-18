@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,34 +25,38 @@ namespace Relevés_météo
         public MainWindow()
         {
             InitializeComponent();
+            Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
             _DALmétéo = new DALMeteo();
             btnChemin.Click += BtnChemin_Click;
-            cbxVue.SelectionChanged += CbxVue_SelectionChanged;            
+            cbxVue.SelectionChanged += Cbx_SelectionChanged;
+            cbxTri.SelectionChanged += Cbx_SelectionChanged;
+            cbxCroissant.SelectionChanged += Cbx_SelectionChanged;
         }
 
-        private void CbxVue_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch (cbxVue.SelectedIndex)
-            {
-                case 0:
-                    lbxRelevésMétéo.ItemTemplate = (DataTemplate)Resources["RelevésMétéo"];
-                    ControleContent.Visibility = Visibility.Hidden;
-                    stack1.Visibility = Visibility.Visible;
-                    stack2.Visibility = Visibility.Visible;
-                    stack3.Visibility = Visibility.Visible;
-                    stack4.Visibility = Visibility.Visible;
 
-                    break;
-                case 1:
-                    lbxRelevésMétéo.ItemTemplate = (DataTemplate)Resources["RelevésParAnnée"];
-                    ControleContent.Visibility = Visibility.Visible;
-                    stack1.Visibility = Visibility.Hidden;
-                    stack2.Visibility = Visibility.Hidden;
-                    stack3.Visibility = Visibility.Hidden;
-                    stack4.Visibility = Visibility.Hidden;
-                    break;
-                default:
-                    break;
+        private void Cbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            lbxRelevésMétéo.ItemTemplate = (DataTemplate)Resources[cbxVue.SelectedValue];
+            ICollectionView view = CollectionViewSource.GetDefaultView(_DALmétéo.Data);
+
+            if (cbxVue.SelectedValue.ToString() == "RelevésParAnnée")
+            {
+                view.SortDescriptions.Clear();
+                view.GroupDescriptions.Clear();
+
+                var sens = cbxCroissant.SelectedValue.ToString() == "0" ? ListSortDirection.Ascending : ListSortDirection.Descending;
+                var tri = new SortDescription(cbxTri.SelectedValue.ToString(), sens);
+
+                view.SortDescriptions.Add(new SortDescription("Année", sens));
+                view.GroupDescriptions.Add(new PropertyGroupDescription("Année"));
+                
+                view.SortDescriptions.Add(tri);
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+                view.SortDescriptions.Clear();
             }
         }
 
@@ -59,21 +64,19 @@ namespace Relevés_météo
         {
             Microsoft.Win32.OpenFileDialog file = new Microsoft.Win32.OpenFileDialog();
             file.InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-            bool? result = file.ShowDialog();
+            file.ShowDialog();
 
             try
             {
-                if (result == true)
-                    _DALmétéo.ChargerDonnées(file.FileName);
-                lbxRelevésMétéo.DataContext = _DALmétéo.Data;
-                DataContext = _DALmétéo.Stats;
-                ControleContent.DataContext = _DALmétéo.Data;
+                _DALmétéo.ChargerDonnées(file.FileName);
+                DataContext = _DALmétéo;
+
             }
             catch (Exception)
             {
                 MessageBox.Show("Le chemin spécifié n'est pas correct.");
             }
-            
+
         }
     }
 }
