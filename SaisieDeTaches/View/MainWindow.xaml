@@ -5,21 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaisieDeTaches"
         mc:Ignorable="d"
-        Title="Saisie de taches" Height="350" Width="525">
+        Title="Saisie de taches" Height="400" Width="600">
     <Window.Resources>
         <local:BoolToCrossConverter x:Key="BoolToCrossConverter"/>
         <local:ConvModeEditActivation x:Key="ConvModeEditActivation"/>
         <local:ConvModeEditLectureSeule x:Key="ConvModeEditLectureSeule"/>
+        <local:ConvModeEditToString x:Key="ConvModeEditToString"/>
+        <Style x:Key="StyleBouton">
+            <Setter Property="TextBlock.FontSize" Value="26"/>
+            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+            <Setter Property="DockPanel.Background" Value="White"/>
+            <Setter Property="DockPanel.Margin" Value="1"/>
+            <Setter Property="TextBlock.Foreground" Value="CornflowerBlue"/>
+        </Style>
     </Window.Resources>
-    <DockPanel>
-        <Expander DockPanel.Dock="Right" IsExpanded="False" ExpandDirection="Left" Margin="5">
+    <DockPanel Background="AntiqueWhite">
+        <Expander DockPanel.Dock="Right" IsExpanded="False" ExpandDirection="Left" Background="AntiqueWhite">
             <Border BorderBrush="Gray" BorderThickness="1 ">
-                <StackPanel Width="250" Margin="5">
+                <StackPanel Width="250" >
                     <StackPanel Orientation="Horizontal"  Margin="10" Height="40">
-                        <Button Content="+" Width="50" Command="{Binding CmdAjouter}" />
-                        <Button Content="&#x2212;" Width="50" Command="{Binding CmdSupprimer}"/>
-                        <Button Content="&#x2713;" Width="50" Command="{Binding CmdEnregistrer}"/>
-                        <Button Content="&#x21b6;" Width="50" Command="{Binding CmdAnnuler}"/>
+                        <Button Content="+" Width="50" Command="{Binding CmdAjouter}" Style="{StaticResource StyleBouton}"/>
+                        <Button Content="&#x2212;" Width="50" Command="{Binding CmdSupprimer}" Style="{StaticResource StyleBouton}"/>
+                        <Button Content="&#x2713;" Width="50" Command="{Binding CmdEnregistrer}" Style="{StaticResource StyleBouton}"/>
+                        <Button Content="&#x21b6;" Width="50" Command="{Binding CmdAnnuler}" Style="{StaticResource StyleBouton}"/>
                     </StackPanel>
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Taches/Id, StringFormat='Tache N°{0}'}"/>
@@ -36,7 +44,7 @@
                     <StackPanel Margin="10,0">
                         <Border BorderThickness="1" BorderBrush="Gray">
                             <ScrollViewer>
-                                <TextBox Text="{Binding Path=Taches/Description}" TextWrapping="Wrap" IsReadOnly="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}"/>
+                                <TextBox MinHeight="70" Text="{Binding Path=Taches/Description}" TextWrapping="Wrap" IsReadOnly="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}"/>
                             </ScrollViewer>
                         </Border>
                     </StackPanel>
@@ -44,8 +52,8 @@
             </Border>
         </Expander>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" Text="Liste des taches" Margin="5"/>
-            <ListView Margin="5" ItemsSource="{Binding Taches}" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}" >
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditToString}, StringFormat='Liste des taches {0}'}" Margin="5" FontSize="18" FontStyle="Italic" Foreground="CornflowerBlue"/>
+            <ListView Margin="5,0,0,5" ItemsSource="{Binding Taches}" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
